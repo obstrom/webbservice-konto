@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  database:
+    image: 'postgres'
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: webbservice-konto
+      POSTGRES_PASSWORD: webbservice-konto
+      POSTGRES_DB: webbservice-konto
+    volumes:
+      - database-data:/var/lib/postgresql/data
+
+volumes:
+  database-data:
