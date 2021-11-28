@@ -1,14 +1,13 @@
 package com.example.webbservicekonto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-@Entity
+@Entity(name = "Users")
+@Table(name = "users")
 public class Users {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue (strategy = GenerationType.SEQUENCE)
     private long id;
     private String name;
     private long email;
