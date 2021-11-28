@@ -2,9 +2,9 @@ package com.example.webbservicekonto;
 
 import javax.persistence.*;
 
-@Entity(name = "Users")
-@Table(name = "users")
-public class Users {
+@Entity(name = "UserAccount")
+@Table(name = "user_account")
+public class UserAccount {
 
     @Id
     @GeneratedValue (strategy = GenerationType.SEQUENCE)
@@ -13,10 +13,10 @@ public class Users {
     private String email;
     private String password;
 
-    public Users() {
+    public UserAccount() {
     }
 
-    public Users(String name) {
+    public UserAccount(String name) {
         this.name = name;
     }
 
