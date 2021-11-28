@@ -10,8 +10,8 @@ public class Users {
     @GeneratedValue (strategy = GenerationType.SEQUENCE)
     private long id;
     private String name;
-    private long email;
-    private long password;
+    private String email;
+    private String password;
 
     public Users() {
     }
@@ -28,9 +28,9 @@ public class Users {
         return name;
     }
 
-    public long getEmail() { return email;}
+    public String getEmail() { return email;}
 
-    public long getPassword() { return password;}
+    public String getPassword() { return password;}
 
     public void setName(String name) {
         this.name = name;
@@ -38,9 +38,9 @@ public class Users {
 
     public void setId(long id) { this.id = id;}
 
-    public void setEmail(long email) { this.email = email;}
+    public void setEmail(String email) { this.email = email;}
 
-    public void setPassword(long password) { this.password = password;}
+    public void setPassword(String password) { this.password = password;}
 
     @Override
     public String toString() {
