@@ -1,4 +1,4 @@
-package com.example.webbservicekonto;
+package com.example.webbservicekonto.model;
 
 import javax.persistence.*;
 
