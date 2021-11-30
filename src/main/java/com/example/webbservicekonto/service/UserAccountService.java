@@ -84,7 +84,7 @@ public class UserAccountService {
     }
 
     private boolean isStringsNotEqual(String string1, String string2) {
-        return string1.strip().equals(string2.strip());
+        return !string1.strip().equals(string2.strip());
     }
 
 }
