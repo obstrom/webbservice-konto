@@ -4,7 +4,9 @@ import com.example.webbservicekonto.model.UserAccount;
 import com.example.webbservicekonto.repository.UserAccountRepository;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -26,7 +28,7 @@ public class UserAccountService {
 
     public UserAccount findUserAccount(Long id) {
         return userAccountRepository.findById(id)
-                .orElseThrow(() -> new IllegalStateException("no user account with ID '" + id + "' found!"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "No user account with ID " + id + " found."));
     }
 
     // TODO
@@ -35,13 +37,13 @@ public class UserAccountService {
 
     public UserAccount registerNewUserAccount(UserAccount userAccount) {
         if (isStringEmpty(userAccount.getName()))
-            throw new IllegalStateException("new user account requires a name");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "New user account requires a name");
 
         if (isStringEmpty(userAccount.getEmail()))
-            throw new IllegalStateException("new user account requires an email");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "New user account requires an email");
 
         if (isStringEmpty(userAccount.getPassword()))
-            throw new IllegalStateException("new user account requires a password");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "New user account requires a password");
 
         return userAccountRepository.save(userAccount);
     }
@@ -50,7 +52,7 @@ public class UserAccountService {
     public UserAccount updateUserAccount(@NonNull Long id, String newName, String newEmail, String newPassword) {
         boolean anyFieldsUpdated = false;
         UserAccount account = userAccountRepository.findById(id)
-                .orElseThrow(() -> new IllegalStateException("no user account with ID '" + id + "' found!"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "No user account with ID " + id + " found."));
 
         if (!isStringEmpty(newName) && isStringsNotEqual(account.getName(), newName)) {
             account.setName(newName);
@@ -77,7 +79,7 @@ public class UserAccountService {
 
     public void deleteUserAccount(Long id) {
         if (!userAccountRepository.existsById(id))
-            throw new IllegalStateException("no account with ID '" + id + "' found!");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No user account with ID " + id + " found.");
 
         userAccountRepository.deleteById(id);
     }
