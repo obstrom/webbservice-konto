@@ -33,7 +33,7 @@ public class UserAccountService {
     //  - Add method "getUsersByName()" ?
     //  - Add method "getUsersByEmail()" ?
 
-    public void registerNewUserAccount(UserAccount userAccount) {
+    public UserAccount registerNewUserAccount(UserAccount userAccount) {
         if (isStringEmpty(userAccount.getName()))
             throw new IllegalStateException("new user account requires a name");
 
@@ -43,11 +43,11 @@ public class UserAccountService {
         if (isStringEmpty(userAccount.getPassword()))
             throw new IllegalStateException("new user account requires a password");
 
-        userAccountRepository.save(userAccount);
+        return userAccountRepository.save(userAccount);
     }
 
     @Transactional
-    public void updateUserAccount(@NonNull Long id, String newName, String newEmail, String newPassword) {
+    public UserAccount updateUserAccount(@NonNull Long id, String newName, String newEmail, String newPassword) {
         boolean anyFieldsUpdated = false;
         UserAccount account = userAccountRepository.findById(id)
                 .orElseThrow(() -> new IllegalStateException("no user account with ID '" + id + "' found!"));
@@ -69,7 +69,10 @@ public class UserAccountService {
             anyFieldsUpdated = true;
         }
 
-        if (anyFieldsUpdated) userAccountRepository.save(account);
+        if (anyFieldsUpdated)
+            return userAccountRepository.save(account);
+
+        return account;
     }
 
     public void deleteUserAccount(Long id) {
