@@ -10,13 +10,16 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController
+@CrossOrigin(origins = "http://localhost:xxxx", maxAge = 3600)
 @RequestMapping("/api/v1")
 
 public class AccountController {
 
     @Autowired
     private UserAccountService UserAccountService;
+
 
     @GetMapping("/users")
     public ResponseEntity<UserAccountResponse> getAllUsers() {

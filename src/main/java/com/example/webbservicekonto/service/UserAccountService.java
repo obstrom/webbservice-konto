@@ -5,6 +5,8 @@ import com.example.webbservicekonto.repository.UserAccountRepository;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -16,9 +18,12 @@ public class UserAccountService {
 
     private final UserAccountRepository userAccountRepository;
 
+    PasswordEncoder passwordEncoder;
+
     @Autowired
     public UserAccountService(UserAccountRepository userAccountRepository) {
         this.userAccountRepository = userAccountRepository;
+        this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
     // TODO - Add sorting?
@@ -36,6 +41,8 @@ public class UserAccountService {
     //  - Add method "getUsersByEmail()" ?
 
     public UserAccount registerNewUserAccount(UserAccount userAccount) {
+        String encodedPassword = this.passwordEncoder.encode(userAccount.getPassword());
+        userAccount.setPassword(encodedPassword);
         if (isStringEmpty(userAccount.getName()))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "New user account requires a name");
 
