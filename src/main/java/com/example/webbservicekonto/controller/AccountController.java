@@ -29,18 +29,18 @@ public class AccountController {
         UserAccount userAccount =
                 UserAccountService.findUserAccount(userId);
 
-        return ResponseEntity.ok().body(userAccount);
-    }
+
+
+        return ResponseEntity.ok().body(userAccount);}
 
 
     @PostMapping("/users")
     public void createUser(@RequestBody UserAccount user) {
-        UserAccountService.registerNewUserAccount(user);
-    }
+        UserAccountService.registerNewUserAccount(user);}
+
     @PutMapping("/users/{id}")
     public void updateUser(
             @PathVariable(value = "id") Long userId, @RequestBody UserAccount userDetails) {
 
-        UserAccountService.updateUserAccount(userId, userDetails.getName(), userDetails.getEmail(), userDetails.getPassword());
-    }
+        UserAccountService.updateUserAccount(userId, userDetails.getName(), userDetails.getEmail(), userDetails.getPassword()); }
 }
