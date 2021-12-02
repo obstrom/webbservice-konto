@@ -8,7 +8,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 
 
-public class MyErrorHandler {
+public class ErrorHandler {
     @RequestMapping("/error")
 
     public String handleError(HttpServletRequest request) {
