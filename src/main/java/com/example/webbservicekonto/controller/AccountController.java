@@ -32,6 +32,11 @@ public class AccountController {
 
 
         return ResponseEntity.ok().body(userAccount);}
+   @DeleteMapping("/users/{id}")
+   public void DeleteUser (@PathVariable(value="id") Long userId) {
+        UserAccountService.deleteUserAccount(userId);
+
+    }
 
 
     @PostMapping("/users")
@@ -43,4 +48,7 @@ public class AccountController {
             @PathVariable(value = "id") Long userId, @RequestBody UserAccount userDetails) {
 
         UserAccountService.updateUserAccount(userId, userDetails.getName(), userDetails.getEmail(), userDetails.getPassword()); }
+
+
 }
+
