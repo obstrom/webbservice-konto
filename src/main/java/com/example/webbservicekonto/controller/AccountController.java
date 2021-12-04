@@ -47,4 +47,9 @@ public class AccountController {
 
         return ResponseEntity.ok().body(new UserAccountResponse(HttpStatus.OK, "Account updated successfully", userAccount));
     }
+
+    @DeleteMapping("/users/{id}")
+    public void DeleteUser (@PathVariable(value="id") Long userId) {
+        UserAccountService.deleteUserAccount(userId);
+    }
 }
