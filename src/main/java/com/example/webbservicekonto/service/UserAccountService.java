@@ -26,7 +26,6 @@ public class UserAccountService {
         this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
-    // TODO - Add sorting?
     public List<UserAccount> findAllUserAccounts() {
         return userAccountRepository.findAll();
     }
@@ -35,10 +34,6 @@ public class UserAccountService {
         return userAccountRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "No user account with ID " + id + " found."));
     }
-
-    // TODO
-    //  - Add method "getUsersByName()" ?
-    //  - Add method "getUsersByEmail()" ?
 
     public UserAccount registerNewUserAccount(UserAccount userAccount) {
         String encodedPassword = this.passwordEncoder.encode(userAccount.getPassword());
@@ -72,8 +67,6 @@ public class UserAccountService {
         }
 
         if (!isStringEmpty(newPassword) && isStringsNotEqual(account.getPassword(), newPassword)) {
-            // TODO - Add Security?
-            //  - Hash and salt?
             account.setPassword(newPassword);
             anyFieldsUpdated = true;
         }
