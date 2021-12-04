@@ -32,4 +32,11 @@ public class UserAccountResponse {
         this.entities = entities;
     }
 
+    public UserAccountResponse(HttpStatus status, String message) {
+        this.status = status;
+        this.message = message;
+        this.entity = null;
+        this.entities = null;
+    }
+
 }
